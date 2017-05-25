@@ -16,6 +16,7 @@
     <div>
     <form action="#" id="form" class="form-horizontal">
                     <input type="hidden" value="" name="id"/><!-- ID Checker --> 
+                    
                     <div class='row' style='margin-top: 0px !important;'>
                                 <div style='margin-top: -15px !important;' class='col-md-2' >
                                     <h3>First Name</h3>
@@ -72,6 +73,15 @@
                                     <span class="help-block"></span>
                                 </div>
                     </div>
+
+            <div class="alert alert-success" style="display: none;">
+            </div>
+            <div class="alert alert-danger" style="display: none;">
+            </div>
+            <div class="alert alert-info" style="display: none;">
+            </div>
+
+
 
           <div class='row pull-right'>
                                 <div class="col-md-12 ">
@@ -184,7 +194,7 @@ function edit_person(id)
             $('[name="gender"]').val(data.gender);
             $('[name="address"]').val(data.address);
             $('[name="dob"]').datepicker('update',data.dob);
-
+            
             
 
         },
@@ -225,8 +235,16 @@ function save()
 
             if(data.status) 
             {
+                 if($checkadd == ''){
+                    
+                $('.alert-success').html('<center>Added Successfully</center>').fadeIn().delay(2000).fadeOut('fast');
+                }   else{
+                    
+                $('.alert-info').html('<center>Updated Successfully</center>').fadeIn().delay(2000).fadeOut('fast');
+                }
                 $('#form')[0].reset(); // reset form
                 reload_table();
+
                
             }
             else
@@ -262,6 +280,7 @@ function delete_person(id)
             success: function(data)
             {
                 reload_table();
+                $('.alert-danger').html('<center>Deleted Successfully</center>').fadeIn().delay(2000).fadeOut('fast');
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
